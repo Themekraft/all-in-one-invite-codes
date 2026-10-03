@@ -1,9 +1,9 @@
 === All in One Invite Codes ===
 Contributors: svenl77, gfirem, marin25089, camiloluna
 Tags: registration, invite only, invite codes
-Requires at least: 4.9
-Tested up to: 6.9
-Requires PHP: 5.3
+Requires at least: 5.9
+Tested up to: 7.1
+Requires PHP: 7.4
 Stable tag: 1.3.0-beta.7
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -98,8 +98,10 @@ Have fun!
 * Plugin Check: cleaned up second-pass scan residuals — annotated helper-verified AJAX nonce reads (the `_check_nonce` helper sits between PCP and the unslashed `$_POST` access), suppressed sanitize-after-unslash false positives on the metabox save flow, repositioned the dynamic `$wpdb->prepare` placeholder ignore block in the bulk tree query, and aligned the read-only `$_GET` admin-tab routing reads with proper phpcs:disable/enable annotations. Three TextDomainMismatch warnings on the shared pricing-page submodule are now suppressed at the submodule layer.
 * Plugin Check: aligned `@package` docblocks with the readable Plugin Name "All in One Invite Codes" (was the snake_case slug `all_in_one_invite_codes`).
 * Trashed a stray `vendor/freemius/wordpress-sdk/assets/img/wc4bp.png` left over from cross-plugin Freemius admin browsing.
-* Release tooling: bumped the shared tk_script + pricing-page submodules — release zips now install production-only deps inside the release tree (no more dev deps shipped) and skip the empty `*.free.zip` artifact on premium-only plugins.
 * Tested up to WordPress 6.9.
+* The Go Pro page sells the Invite Codes Bundle, and it is hidden on sites with an active bundle license.
+* Requires WordPress 5.9 or later and PHP 7.4 or later.
+* Tested up to WordPress 7.1.
 
 = 1.2.0 - 26 Jun 2025 =
 * Updated Freemius SDK.
