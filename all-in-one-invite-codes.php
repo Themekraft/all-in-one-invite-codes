@@ -90,7 +90,12 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		 * Add the bundle screen menu.
 		 */
 		public function all_in_one_invite_codes_bundle_screen_menu() {
-			if ( all_in_one_invite_codes_core_fs()->is_not_paying() ) {
+			$fs = all_in_one_invite_codes_core_fs();
+			// The plugin declares no paid plans of its own (has_paid_plans false), so the
+			// SDK never syncs licenses here and is_not_paying() stays true even with a
+			// bundle license. Bundle licenses put the install on the hidden Professional
+			// plan, which get_plan_name() reads from the install itself.
+			if ( $fs->is_not_paying() && 'professional' !== $fs->get_plan_name() ) {
 				add_submenu_page( 'edit.php?post_type=tk_invite_codes', __( 'Bundle', 'all-in-one-invite-codes' ), __( 'Go Pro!', 'all-in-one-invite-codes' ), 'manage_options', 'tk_invite_codes_bundle_screen', 'tk_pricing_page_render', 99 );
 			}
 		}
