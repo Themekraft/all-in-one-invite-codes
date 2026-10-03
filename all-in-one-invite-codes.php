@@ -373,6 +373,9 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 					'menu'                           => array(
 						'slug'    => 'edit.php?post_type=tk_invite_codes',
 						'support' => false,
+						// The Go Pro page is the pricing page; Freemius' own lists the hidden
+						// Professional plan that only exists for bundle licenses (TKT-85).
+						'pricing' => false,
 					),
 					'bundle_id'                      => '8013',
 					'bundle_public_key'              => 'pk_b8b8e319fd537d6d44d73a448f64e',
