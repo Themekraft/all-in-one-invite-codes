@@ -4,7 +4,7 @@ Tags: registration, invite only, invite codes
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,9 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.1 - 03 Oct 2026 =
+* Removed build tooling files that were accidentally included in the 1.3.0 package.
+
 = 1.3.0 - 03 Oct 2026 =
 * Plugin Check: fixed plugin-header License field, removed the invalid Network header, stripped hidden macOS metadata, and removed vestigial empty Freemius leftover directories.
 * Plugin Check: hardened AJAX endpoints with proper nonce verification, ownership-based authorization (post owners and admins) for the user-facing manage / disable / resend actions, and full unslash + sanitize on every accepted input.
