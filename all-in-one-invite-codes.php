@@ -416,9 +416,6 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 			// GDPR Admin Notice
 			$freemius->add_filter( 'handle_gdpr_admin_notice', '__return_true' );
 
-			if ( $freemius->is__premium_only() ) {
-				define( 'TK_ALL_IN_ONE_INVITE_CODES_PRO_VERSION', 'pro' );
-			}
 		}
 	}
 
