@@ -373,6 +373,7 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 					'menu'                           => array(
 						'slug'    => 'edit.php?post_type=tk_invite_codes',
 						'support' => false,
+						'pricing' => false,
 					),
 					'bundle_id'                      => '8013',
 					'bundle_public_key'              => 'pk_b8b8e319fd537d6d44d73a448f64e',
