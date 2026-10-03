@@ -79,6 +79,7 @@ jQuery(document).ready(function (jQuery) {
 
         var currentForm = jQuery("#bulk-invite-aioic");
         var formMessage = jQuery('#form_message_aioic');
+        var generateNewInvites = jQuery('#new_invites').val();
         formMessage.removeClass();
         if (jQuery.validator && !currentForm.valid()) {
             return false;
@@ -92,7 +93,8 @@ jQuery(document).ready(function (jQuery) {
             dataType: 'json',
             data: {
                 "action": "aioic_generate_multiple_invites",
-                "data": FormData
+                "data": FormData,
+                "newinvites":generateNewInvites,
             },
             error: function (xhr, status, error) {
                 formMessage.addClass('bf-alert error');
@@ -147,5 +149,13 @@ jQuery(document).ready(function (jQuery) {
         });
         return false;
     });
+
+    var goPro = jQuery(
+        'a[href="edit.php?post_type=tk_invite_codes&page=tk_invite_codes_bundle_screen"]'
+    );
+    goPro.css("color", "#fca300");
+    goPro
+        .parent()
+        .insertAfter("#menu-posts-tk_invite_codes > ul > li:last-child");
 
 });

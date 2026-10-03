@@ -1,10 +1,14 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Add the Settings Page to the All in One Invite Codes Menu
  */
 function all_in_one_invite_codes_settings_menu() {
-	add_submenu_page( 'edit.php?post_type=tk_invite_codes', __( 'All in One Invite Codes Settings', 'all_in_one_invite_codes' ), __( 'Settings', 'all_in_one_invite_codes' ), 'manage_options', 'all_in_one_invite_codes_settings', 'all_in_one_invite_codes_settings_page' );
+	add_submenu_page( 'edit.php?post_type=tk_invite_codes', __( 'All in One Invite Codes Settings', 'all-in-one-invite-codes' ), __( 'Settings', 'all-in-one-invite-codes' ), 'manage_options', 'all_in_one_invite_codes_settings', 'all_in_one_invite_codes_settings_page' );
 }
 
 add_action( 'admin_menu', 'all_in_one_invite_codes_settings_menu' );
@@ -20,7 +24,6 @@ function all_in_one_invite_codes_settings_page() { ?>
 			<div id="post-body" class="metabox-holder columns-2">
 
 				<div id="postbox-container-1" class="postbox-container">
-					<?php all_in_one_invite_codes_settings_page_sidebar(); ?>
 				</div>
 				<div id="postbox-container-2" class="postbox-container">
 					<?php all_in_one_invite_codes_settings_page_tabs_content(); ?>
@@ -56,23 +59,70 @@ function all_in_one_invite_codes_admin_tabs( $current = 'general' ) {
  */
 function all_in_one_invite_codes_register_option() {
 
-	// General Settings
-	register_setting( 'all_in_one_invite_codes_general', 'all_in_one_invite_codes_general', 'all_in_one_invite_codes_default_sanitize' );
+	// General Settings.
+	register_setting(
+		'all_in_one_invite_codes_general',
+		'all_in_one_invite_codes_general',
+		array( 'sanitize_callback' => 'all_in_one_invite_codes_sanitize_general' )
+	);
 
-	// Mail Templates
-	register_setting( 'all_in_one_invite_codes_mail_templates', 'all_in_one_invite_codes_mail_templates', 'all_in_one_invite_codes_default_sanitize' );
-
+	// Mail Templates.
+	register_setting(
+		'all_in_one_invite_codes_mail_templates',
+		'all_in_one_invite_codes_mail_templates',
+		array( 'sanitize_callback' => 'all_in_one_invite_codes_sanitize_mail_templates' )
+	);
 }
 
 add_action( 'admin_init', 'all_in_one_invite_codes_register_option' );
 
 /**
- * @param $new
+ * Sanitize the general settings option.
  *
- * @return mixed
+ * @param array<string,mixed>|null $input
+ * @return array<string,string>
  */
-function all_in_one_invite_codes_default_sanitize( $new ) {
-	return $new;
+function all_in_one_invite_codes_sanitize_general( $input ) {
+	$out = array();
+	if ( ! is_array( $input ) ) {
+		return $out;
+	}
+	if ( isset( $input['default_registration'] ) ) {
+		$out['default_registration'] = in_array( $input['default_registration'], array( 'enabled', 'disable' ), true )
+			? $input['default_registration']
+			: 'disable';
+	}
+	if ( isset( $input['generate_codes_amount'] ) ) {
+		$out['generate_codes_amount'] = (string) absint( $input['generate_codes_amount'] );
+	}
+	if ( isset( $input['character_length'] ) ) {
+		$out['character_length'] = (string) max( 5, absint( $input['character_length'] ) );
+	}
+	return $out;
+}
+
+/**
+ * Sanitize the mail templates option. Subject is plain text; message bodies allow HTML
+ * within wp_kses_post() since admins regularly drop in formatted notification copy.
+ *
+ * @param array<string,mixed>|null $input
+ * @return array<string,string>
+ */
+function all_in_one_invite_codes_sanitize_mail_templates( $input ) {
+	$out = array();
+	if ( ! is_array( $input ) ) {
+		return $out;
+	}
+	if ( isset( $input['subject'] ) ) {
+		$out['subject'] = sanitize_text_field( $input['subject'] );
+	}
+	foreach ( $input as $key => $value ) {
+		if ( 'subject' === $key ) {
+			continue;
+		}
+		$out[ sanitize_key( $key ) ] = wp_kses_post( $value );
+	}
+	return $out;
 }
 
 /**
@@ -81,39 +131,43 @@ function all_in_one_invite_codes_default_sanitize( $new ) {
  */
 function all_in_one_invite_codes_settings_page_tabs_content() {
 	global $pagenow, $all_in_one_invite_codes;
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	// All inputs here come from the WP-rendered admin URL on a read-only screen
+	// (tab routing + post-save banner). Capability check above is the gate;
+	// no nonce is required to render the screen.
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only admin screen routing; capability checked above.
+	$page_param = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+	$tab        = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
+	$updated    = isset( $_GET['updated'] ) ? sanitize_key( wp_unslash( $_GET['updated'] ) ) : '';
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended
 	?>
 	<div id="poststuff">
 
 		<?php
 
 		// Display the Update Message
-		if ( isset( $_GET['updated'] ) && 'true' == sanitize_text_field( $_GET['updated'] ) ) {
+		if ( 'true' === $updated ) {
 			echo '<div class="updated" ><p>All in One Invite Codes...</p></div>';
 		}
 
-		if ( isset( $_GET['tab'] ) ) {
-			all_in_one_invite_codes_admin_tabs( sanitize_key( $_GET['tab'] ) );
-		} else {
-			all_in_one_invite_codes_admin_tabs( 'general' );
-		}
+		all_in_one_invite_codes_admin_tabs( $tab );
 
-		if ( $pagenow == 'edit.php' && sanitize_key( $_GET['page'] ) == 'all_in_one_invite_codes_settings' ) {
-
-			if ( isset( $_GET['tab'] ) ) {
-				$tab = sanitize_key( $_GET['tab'] );
-			} else {
-				$tab = 'general';
-			}
+		if ( $pagenow === 'edit.php' && 'all_in_one_invite_codes_settings' === $page_param ) {
 
 			switch ( $tab ) {
 				case 'general':
 					$all_in_one_invite_codes_general = get_option( 'all_in_one_invite_codes_general' );
 
-					if( empty( $all_in_one_invite_codes_general ) ){
-						$all_in_one_invite_codes_general = array();
-						$all_in_one_invite_codes_general['default_registration']  		  = 'Enable';
-						$all_in_one_invite_codes_general['generate_codes_amount'] 		  = '5';
-						$all_in_one_invite_codes_general['character_length']              = '5';
+					if ( empty( $all_in_one_invite_codes_general ) ) {
+						$all_in_one_invite_codes_general = array(
+							'default_registration'  => 'enabled',
+							'generate_codes_amount' => '5',
+							'character_length'      => '5',
+						);
 						add_option( 'all_in_one_invite_codes_general', $all_in_one_invite_codes_general, '', 'yes' );
 					}
 					
@@ -133,7 +187,7 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 										<tr>
 											<th colspan="2">
 												<h3>
-													<span><?php esc_html_e( 'General Settings', 'all_in_one_invite_codes' ); ?></span>
+													<span><?php esc_html_e( 'General Settings', 'all-in-one-invite-codes' ); ?></span>
 												</h3>
 											</th>
 										</tr>
@@ -160,7 +214,7 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 										</tr>
 										<tr valign="top">
 											<th scope="row" valign="top">
-												<?php esc_html_e( 'How manny now Invite Codes should get generated after the new user is activated?', 'all-in-one-invite-codes' ); ?>
+												<?php esc_html_e( 'How many new Invite Codes should be generated after a new user is activated?', 'all-in-one-invite-codes' ); ?>
 											</th>
 											<td>
 												<input type="number"
@@ -171,7 +225,7 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 										</tr>
 										<tr valign="top">
 											<th scope="row" valign="top">
-												<?php esc_html_e( 'Invites codes characters length', 'all-in-one-invite-codes' ); ?>
+												<?php esc_html_e( 'Invite code character length', 'all-in-one-invite-codes' ); ?>
 											</th>
 											<td>
 												<input type="number"
@@ -202,7 +256,7 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 						add_option( 'all_in_one_invite_codes_mail_templates', $all_in_one_invite_codes_mail_templates, '', 'yes' );
 					}
 
-					$message_text_default = __( 'You got an invite from the site [site_name]. Please use this link to register with your invite code [invite_link]' );
+					$message_text_default = __( 'You got an invite from the site [site_name]. Please use this link to register with your invite code [invite_link]', 'all-in-one-invite-codes' );
 					?>
 					<div class="metabox-holder">
 						<div class="postbox all_in_one_invite_codes-metabox">
@@ -226,7 +280,7 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 										<tr>
 											<th colspan="2">
 												<h3>
-													<span><?php esc_html_e( 'Invite eMail Settings', 'all_in_one_invite_codes' ); ?></span>
+													<span><?php esc_html_e( 'Invite eMail Settings', 'all-in-one-invite-codes' ); ?></span>
 												</h3>
 											</th>
 										</tr>
@@ -295,6 +349,3 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 	<?php
 }
 
-function all_in_one_invite_codes_settings_page_sidebar() {
-	echo '<p>Placeholder Text</p>';
-}

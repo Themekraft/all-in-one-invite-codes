@@ -1,10 +1,10 @@
 === All in One Invite Codes ===
-Contributors: svenl77, gfirem, marin25089
+Contributors: svenl77, gfirem, marin25089, camiloluna
 Tags: registration, invite only, invite codes
-Requires at least: 4.9
-Tested up to: 6.1.1
-Requires PHP: 5.3
-Stable tag: 1.1.4
+Requires at least: 5.9
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 1.3.0
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,73 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.0 - 03 Oct 2026 =
+* Plugin Check: fixed plugin-header License field, removed the invalid Network header, stripped hidden macOS metadata, and removed vestigial empty Freemius leftover directories.
+* Plugin Check: hardened AJAX endpoints with proper nonce verification, ownership-based authorization (post owners and admins) for the user-facing manage / disable / resend actions, and full unslash + sanitize on every accepted input.
+* Plugin Check: replaced raw output with escaped variants, replaced `rand()` with `wp_rand()`, fixed text-domain mismatches across the codebase, replaced concatenated translation strings with `sprintf()` plus translator notes, and added missing ABSPATH guards.
+* Plugin Check: switched the settings sanitize callbacks from a passthrough to typed sanitizers and cached the direct `$wpdb` query used by the bulk tree admin screen.
+* Plugin Check: dropped the manual `load_plugin_textdomain()` call — WordPress.org has loaded translations automatically since WP 4.6.
+* Fixed a long-standing bug in the "Invite a Friend Now" handler that bound the recipient email to the invite code before checking whether `wp_mail()` actually delivered. A delivery failure no longer permanently locks the code to an address it never reached, so the inviter can retry from the same code.
+* Cleaned up the user-facing English copy: typos ("manny", "thais", "below to" → "belong to", "Valide" → "Valid"), broken phrasing ("could not get send" → "could not be sent", "can not get changed/resent" → "cannot be changed/resent", "Multi use invite code limit reached" → "Use limit reached for this multi-use invite code"), and several rewritten admin descriptions for clarity. POT regenerated; bundled es_ES / pt_BR translations carried forward where the meaning was preserved.
+* Updated Freemius SDK to 2.13.1.
+* Wired Freemius bundle credentials so the Invite Codes Bundle license auto-activates after purchase.
+* Reworked the Go Pro page to use the parameterized shared pricing-page submodule with three site-license tiers.
+* Refreshed the Go Pro page card layout to a responsive CSS grid.
+* Highlighted the Go Pro menu link in the admin sidebar.
+* Plugin Check: cleaned up second-pass scan residuals — annotated helper-verified AJAX nonce reads (the `_check_nonce` helper sits between PCP and the unslashed `$_POST` access), suppressed sanitize-after-unslash false positives on the metabox save flow, repositioned the dynamic `$wpdb->prepare` placeholder ignore block in the bulk tree query, and aligned the read-only `$_GET` admin-tab routing reads with proper phpcs:disable/enable annotations. Three TextDomainMismatch warnings on the shared pricing-page submodule are now suppressed at the submodule layer.
+* Plugin Check: aligned `@package` docblocks with the readable Plugin Name "All in One Invite Codes" (was the snake_case slug `all_in_one_invite_codes`).
+* Trashed a stray `vendor/freemius/wordpress-sdk/assets/img/wc4bp.png` left over from cross-plugin Freemius admin browsing.
+* Tested up to WordPress 6.9.
+* The Go Pro page sells the Invite Codes Bundle, and it is hidden on sites with an active bundle license.
+* Requires WordPress 5.9 or later and PHP 7.4 or later.
+* Tested up to WordPress 7.1.
+
+= 1.2.0 - 26 Jun 2025 =
+* Updated Freemius SDK.
+* Update Go Pro page.
+* Tested up to WordPress 6.8.1.
+
+= 1.1.15 - 10 Jul 2024 =
+* Updated Freemius SDK.
+* Tested up to WordPress 6.6
+
+= 1.1.14 - 16 Nov 2023 =
+* Updated Freemius SDK.
+* Tested up to WordPress 6.4.1
+
+= 1.1.13 - 02 Sep 2023 =
+* Fixed issue with new invite codes amount in bulk creation process.
+* Tested up to WordPress 6.3.1
+
+= 1.1.12 - 25 Jul 2023 =
+* Fixed issue with extension All in One Invite Codes BuddyPress.
+
+= 1.1.11 - 05 Jul 2023 =
+* Fixed XSS vulnerability issue.
+* Tested up to WordPress 6.2.2
+
+= 1.1.10 - 04 May 2023 =
+* Tested up to WordPress 6.2
+* Updated Freemius SDK.
+
+= 1.1.9 - 24 Mar 2023 =
+* Removed unwanted text line from settings page.
+* Updated Freemius SDK.
+
+= 1.1.8 - 14 Mar 2023 =
+* Updated Freemius SDK.
+
+= 1.1.7 - 08 Feb 2023 =
+* Removed external images from go pro screen.
+* Renamed some HTML elements to avoid conflicts with other screens.
+
+= 1.1.6 - 05 Jan 2023 =
+* Fixed issue with user tracker screen.
+* Added Go Pro menu tab.
+
+= 1.1.5 - 22 Dec 2022 =
+* Fixed issue with HTML tags in email template.
+
 = 1.1.4 - 16 Dec 2022 =
 * Updated Freemius SDK.
 * Added bundle license auto activation.
@@ -91,7 +158,7 @@ Have fun!
 
 = 1.1.2 - 21 Nov 2022 =
 * Fixed issue with invite codes bulk process.
-* Tested up to WordPress 6.1.1 
+* Tested up to WordPress 6.1.1
 
 = 1.1.1 - 19 Oct 2022 =
 * Fixed issue with email template default settings.
