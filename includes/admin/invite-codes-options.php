@@ -7,10 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Create the metabox for the code options
  */
-function all_in_one_invite_codes_create_metabox() {
+function all_in_one_invite_codes_create_metabox( $post ) {
 	add_meta_box(
 		'all_in_one_invite_codes_options',
-		'Invite Code: <small>' . all_in_one_invite_codes_md5() . '</small>',
+		'Invite Code: <small>' . all_in_one_invite_codes_md5( $post->ID ) . '</small>',
 		'all_in_one_invite_codes_render_metabox',
 		'tk_invite_codes',
 		'normal',
@@ -18,7 +18,7 @@ function all_in_one_invite_codes_create_metabox() {
 	);
 }
 
-add_action( 'add_meta_boxes', 'all_in_one_invite_codes_create_metabox' );
+add_action( 'add_meta_boxes_tk_invite_codes', 'all_in_one_invite_codes_create_metabox' );
 
 
 
