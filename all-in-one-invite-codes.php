@@ -4,7 +4,7 @@
  * Plugin Name: All in One Invite Codes
  * Plugin URI:  https://themekraft.com/all-in-one-invite-codes/
  * Description: Create Invite only Registration Funnels and Products. Boost your site launch and get the attention you desire by creating an intelligent invite only Platform.
- * Version: 1.3.2
+ * Version: 1.3.3
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: ThemeKraft
@@ -38,6 +38,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// The other build (free or premium) is already loaded: let Freemius deactivate it
+// when this one is activated, and stop here. Both builds ship the same Composer
+// autoloader class, so loading it twice is a fatal error.
+if ( function_exists( 'all_in_one_invite_codes_core_fs' ) ) {
+	all_in_one_invite_codes_core_fs()->set_basename( true, __FILE__ );
+	return;
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
@@ -49,7 +57,7 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		/**
 		 * @var string
 		 */
-		public static $version = '1.3.2';
+		public static $version = '1.3.3';
 
 		/**
 		 * Instance of this class
@@ -93,11 +101,9 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		 */
 		public function all_in_one_invite_codes_bundle_screen_menu() {
 			$fs = all_in_one_invite_codes_core_fs();
-			// The plugin declares no paid plans of its own (has_paid_plans false), so the
-			// SDK never syncs licenses here and is_not_paying() stays true even with a
-			// bundle license. Bundle licenses put the install on the hidden Professional
-			// plan, which get_plan_name() reads from the install itself.
-			if ( $fs->is_not_paying() && 'professional' !== $fs->get_plan_name() ) {
+			// Bundle licenses activate on the hidden Professional plan, which makes the
+			// install paying; the plan is never sold on its own.
+			if ( $fs->is_not_paying() ) {
 				add_submenu_page( 'edit.php?post_type=tk_invite_codes', __( 'Bundle', 'all-in-one-invite-codes' ), __( 'Go Pro!', 'all-in-one-invite-codes' ), 'manage_options', 'tk_invite_codes_bundle_screen', 'tk_pricing_page_render', 99 );
 			}
 		}
@@ -368,7 +374,8 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 					'public_key'                     => 'pk_955be38b0c4d2a2914a9f4bc98355',
 					'is_premium'                     => false,
 					'has_addons'                     => true,
-					'has_paid_plans'                 => false,
+					'has_premium_version'            => true,
+					'has_paid_plans'                 => true,
 					'is_org_compliant'               => true,
 					'menu'                           => array(
 						'slug'    => 'edit.php?post_type=tk_invite_codes',
