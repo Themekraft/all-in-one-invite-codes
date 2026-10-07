@@ -38,19 +38,19 @@ if ( ! function_exists( 'all_in_one_invite_codes_pricing_page_config' ) ) {
 			),
 			array(
 				'label' => __( 'All in One Invite Codes', 'all-in-one-invite-codes' ),
-				'url'   => 'https://themekraft.com/wordpress-products/all-in-one-invite-codes/',
+				'url'   => 'https://themekraft.com/plugins/all-in-one-invite-codes/',
 			),
 			array(
 				'label' => __( 'All in One Invite Codes BuddyPress', 'all-in-one-invite-codes' ),
-				'url'   => 'https://themekraft.com/wordpress-products/invite-codes-buddypress/',
+				'url'   => 'https://themekraft.com/add-on/invite-codes-buddypress/',
 			),
 			array(
 				'label' => __( 'All in One Invite Codes BuddyForms', 'all-in-one-invite-codes' ),
-				'url'   => 'https://themekraft.com/wordpress-products/restrict-forms-invite-codes/',
+				'url'   => 'https://themekraft.com/add-on/restrict-forms-invite-codes/',
 			),
 			array(
 				'label' => __( 'All in One Invite Codes WooCommerce Checkout', 'all-in-one-invite-codes' ),
-				'url'   => 'https://themekraft.com/wordpress-products/invite-codes-woocommerce/',
+				'url'   => 'https://themekraft.com/add-on/invite-codes-woocommerce/',
 			),
 			__( 'One year of support', 'all-in-one-invite-codes' ),
 			__( 'One year of updates', 'all-in-one-invite-codes' ),
