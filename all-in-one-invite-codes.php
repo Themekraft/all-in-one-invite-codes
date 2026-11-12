@@ -48,6 +48,30 @@ if ( function_exists( 'all_in_one_invite_codes_core_fs' ) ) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+if ( ! function_exists( 'all_in_one_invite_codes_plugin_dependencies_slug' ) ) {
+	/**
+	 * Let the running copy of All in One Invite Codes satisfy "Requires Plugins: all-in-one-invite-codes".
+	 *
+	 * WordPress (6.5+) matches plugin dependencies by folder name, and the premium
+	 * build lives in `all-in-one-invite-codes-premium`. Without this, add-ons that
+	 * declare All in One Invite Codes as a dependency could not be activated next
+	 * to the premium build.
+	 *
+	 * @param string $slug Dependency slug from a plugin's "Requires Plugins" header.
+	 *
+	 * @return string
+	 */
+	function all_in_one_invite_codes_plugin_dependencies_slug( $slug ) {
+		if ( 'all-in-one-invite-codes' === $slug ) {
+			return basename( __DIR__ );
+		}
+
+		return $slug;
+	}
+
+	add_filter( 'wp_plugin_dependencies_slug', 'all_in_one_invite_codes_plugin_dependencies_slug' );
+}
+
 if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 	/**
 	 * Class AllinOneInviteCodes
