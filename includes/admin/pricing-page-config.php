@@ -37,10 +37,6 @@ if ( ! function_exists( 'all_in_one_invite_codes_pricing_page_config' ) ) {
 				'highlight' => true,
 			),
 			array(
-				'label' => __( 'All in One Invite Codes', 'all-in-one-invite-codes' ),
-				'url'   => 'https://themekraft.com/plugins/all-in-one-invite-codes/',
-			),
-			array(
 				'label' => __( 'All in One Invite Codes BuddyPress', 'all-in-one-invite-codes' ),
 				'url'   => 'https://themekraft.com/add-on/invite-codes-buddypress/',
 			),

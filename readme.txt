@@ -36,13 +36,6 @@ Use Invite Codes in any BuddyForms form and limit Contact, Registration and Post
 * BuddyPress
 Let your users manage there Invite Codes and invite others from there profile.
 
-### Add-ons coming soon
-* MyCred Integration
-Give your users credit for there used coupon codes or if they invite their friends. We build some nice roles so you can increase the engagement of your users to invite others by giving them points
-
-* Invite Tree Stats
-See the flow of invites in a tree and manage your userbase in a way it would not be possible without an invite system. If you have a closed community, you can see in the tree where the people come from, and if you have some unwanted people coming into your community, you can see from which user the people got invited and delete the complete tree or make this user as spam, unwanted or fake.
-
 ### How it works.
 You create the first bunch of invite codes and define how many new Invite Codes get created for a new user. Also, no new invite codes are possible if you want to only invite people without letting them invite their friends. In case you allow your users to invite their friends. The new user gets a list of invite codes and can buy himself invite others. If the friend registers with the invite code, he will again get new invite codes generated and so on. With this technique, you can quickly build a user base of one particular user type.
 
