@@ -4,7 +4,7 @@ Tags: registration, invite only, invite codes
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,11 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.4 - 18 Nov 2026 =
+* The premium version now satisfies add-ons that list All in One Invite Codes as a required plugin (WordPress 6.5+ plugin dependencies).
+* Updated the Go Pro links to the current themekraft.com product pages.
+* The Go Pro page now lists only what the Invite Codes Bundle includes, and the readme no longer announces add-ons that are not planned.
+
 = 1.3.3 - 07 Oct 2026 =
 * Fixed a fatal error when activating the premium version while the free version is active. Activating one version now deactivates the other one.
 * Invite Codes Bundle licenses can now be activated in All in One Invite Codes, so the Go Pro menu is hidden for bundle owners.
