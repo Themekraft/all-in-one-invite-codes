@@ -234,7 +234,7 @@ function all_in_one_invite_codes_tree_admin_js_css() {
 
 function all_in_one_invite_codes_user_tracker_wp_list_pages_filter( $html, $key, $values ) {
 
-	   $user_tree_data = '[';
+	$user_tree_rows = array();
 	foreach ( $values as $key => $value ) {
 		$old_title = $value->post_title;
 
@@ -253,13 +253,15 @@ function all_in_one_invite_codes_user_tracker_wp_list_pages_filter( $html, $key,
 				if( ! empty( $inviter->display_name ) && ! empty( $invited->display_name ) ){
 					$invited_by      = $inviter->display_name;
 					$invited_user    = $invited->display_name ? $invited->display_name : 'not registered yet.';
-					$user_tree_data .= '["' . $invited_by . '","' . $email . ' (<b>' . $invited_user . '</b>)"],';
+					// DataTables renders the cells as HTML: escape every value.
+					$user_tree_rows[] = array(
+						esc_html( $invited_by ),
+						esc_html( $email ) . ' (<b>' . esc_html( $invited_user ) . '</b>)',
+					);
 				}
 			}
 		}
 	}
-	$user_tree_data  = rtrim( $user_tree_data, ',' );
-	$user_tree_data .= ']';
 	echo '<table id="tree_user_table" class="display">
                 <thead>
                     <tr>
@@ -274,7 +276,7 @@ function all_in_one_invite_codes_user_tracker_wp_list_pages_filter( $html, $key,
 
 	echo '</ul>';
 	echo "<script> jQuery('#tree_user_table');";
-	echo "    jQuery('#tree_user_table').dataTable( {data: " . wp_kses_post( $user_tree_data ) . '}) ';
+	echo "    jQuery('#tree_user_table').dataTable( {data: " . wp_json_encode( $user_tree_rows, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) . '}) ';
 
 	echo '</script>';
 }
@@ -302,7 +304,7 @@ function all_in_one_invite_codes_user_tree_wp_list_pages_filter( $html, $key, $v
 				continue;
 			}
 			$avatar    = get_avatar_url( $user->ID );
-			$new_title = $invite_key . ' </a><br> <img src="' . $avatar . '" /> <br>Status: ' . $invite_status . ' <br> User: <a href="' . get_edit_user_link( $user->ID ) . '">  ' . $user->display_name;
+			$new_title = esc_html( $invite_key ) . ' </a><br> <img src="' . esc_url( $avatar ) . '" /> <br>Status: ' . esc_html( $invite_status ) . ' <br> User: <a href="' . esc_url( get_edit_user_link( $user->ID ) ) . '">  ' . esc_html( $user->display_name );
 
 		} else {
 			$new_title = '';
