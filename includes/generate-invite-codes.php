@@ -4,6 +4,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Whether the current user can create invite codes from the front end. Members
+ * create codes from their BuddyPress profile (All in One Invite Codes BuddyPress,
+ * which applies its own restriction settings); without it only administrators can.
+ *
+ * @return bool
+ */
+function all_in_one_invite_codes_user_can_create_codes() {
+	$can = is_user_logged_in() && ( current_user_can( 'manage_options' ) || function_exists( 'all_in_one_invite_codes_profile_tab' ) );
+
+	/**
+	 * Whether the current user can create invite codes from the front end.
+	 *
+	 * @param bool $can     Default decision.
+	 * @param int  $user_id Current user id.
+	 */
+	return (bool) apply_filters( 'all_in_one_invite_codes_user_can_create_codes', $can, get_current_user_id() );
+}
+
 add_action( 'wp_ajax_all_in_one_invite_codes_create_code', 'all_in_one_invite_codes_create_code' );
 function all_in_one_invite_codes_create_code() {
 
@@ -16,11 +35,20 @@ function all_in_one_invite_codes_create_code() {
 		wp_send_json( array( 'error' => esc_html__( 'Security check failed. Please reload the page and try again.', 'all-in-one-invite-codes' ) ) );
 	}
 
+	if ( ! all_in_one_invite_codes_user_can_create_codes() ) {
+		wp_send_json( array( 'error' => esc_html__( 'You are not allowed to create invite codes.', 'all-in-one-invite-codes' ) ) );
+	}
+
 	if ( empty( $_POST['tk_invite_code'] ) ) {
 		return;
 	}
 
 	$tk_invite_code = sanitize_key( wp_unslash( $_POST['tk_invite_code'] ) );
+
+	// The code comes from the form: never take over a code that exists already.
+	if ( '' === $tk_invite_code || all_in_one_invite_codes_get_code_id_by_code( $tk_invite_code ) ) {
+		wp_send_json( array( 'error' => esc_html__( 'This invite code cannot be used. Please reload the page and try again.', 'all-in-one-invite-codes' ) ) );
+	}
 
 	$user_id = get_current_user_id();
 	$args    = array(
