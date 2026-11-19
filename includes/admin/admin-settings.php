@@ -98,6 +98,10 @@ function all_in_one_invite_codes_sanitize_general( $input ) {
 	if ( isset( $input['character_length'] ) ) {
 		$out['character_length'] = (string) max( 5, absint( $input['character_length'] ) );
 	}
+	// Added to this form by All in One Invite Codes WooCommerce.
+	if ( isset( $input['woo_registration'] ) ) {
+		$out['woo_registration'] = 'enabled' === $input['woo_registration'] ? 'enabled' : 'disabled';
+	}
 	return $out;
 }
 
@@ -205,7 +209,8 @@ function all_in_one_invite_codes_settings_page_tabs_content() {
 													echo '<select name="all_in_one_invite_codes_general[default_registration]" id="all_in_one_invite_codes_general">';
 
 													foreach ( $pages as $page_id => $page_name ) {
-														echo '<option ' . esc_attr( selected( $all_in_one_invite_codes_general['default_registration'], $page_id ) ) . 'value="' . esc_attr( $page_id ) . '">' . esc_html( $page_name ) . '</option>';
+														$default_registration = isset( $all_in_one_invite_codes_general['default_registration'] ) ? $all_in_one_invite_codes_general['default_registration'] : 'enabled';
+														echo '<option' . selected( $default_registration, $page_id, false ) . ' value="' . esc_attr( $page_id ) . '">' . esc_html( $page_name ) . '</option>';
 													}
 													echo '</select>';
 												}
