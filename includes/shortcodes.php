@@ -146,7 +146,7 @@ function all_in_one_invite_codes_invited_by_user( $attr ) {
 	$filter_id = isset( $attr['userid'] ) ? $attr['userid'] : get_current_user_id();
 
 	$user = get_user_by( 'ID', $filter_id );
-	if ( $user->ID ) {
+	if ( $user && $user->ID ) {
 		$email     = $user->user_email;
 		$args      = array(
 
@@ -167,7 +167,7 @@ function all_in_one_invite_codes_invited_by_user( $attr ) {
 				if ( $email == $email_needle ) {
 					$author_id  = (int) $the_query->post->post_author;
 					$inviter    = get_user_by( 'ID', $author_id );
-					$invited_by = $inviter->display_name;
+					$invited_by = $inviter ? $inviter->display_name : '';
 					$post_date  = $the_query->post->post_date;
 
 					$formatted_date = wp_date( DATE_COOKIE, strtotime( $post_date ) );
