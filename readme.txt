@@ -4,7 +4,7 @@ Tags: registration, invite only, invite codes
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,11 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.5 - 19 Nov 2026 =
+* Fixed saving the General settings turning off the invite code requirement on the WordPress registration form. If you saved the General settings since version 1.3.0, check that "Default Registration" is still set the way you want after updating.
+* Fixed the WooCommerce registration setting of the WooCommerce add-on not being saved.
+* Fixed PHP warnings in the invited-by shortcode for logged-out visitors and when invites are created from the BuddyPress profile.
+
 = 1.3.4 - 18 Nov 2026 =
 * The premium version now satisfies add-ons that list All in One Invite Codes as a required plugin (WordPress 6.5+ plugin dependencies).
 * Updated the Go Pro links to the current themekraft.com product pages.

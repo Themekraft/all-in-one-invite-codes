@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function all_in_one_invite_codes_md5( $post_id = false ) {
 	global $post;
 
-	if ( ! $post_id ) {
+	if ( ! $post_id && $post instanceof WP_Post ) {
 		$post_id = $post->ID;
 	}
 
