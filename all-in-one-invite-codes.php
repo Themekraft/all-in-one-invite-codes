@@ -4,7 +4,7 @@
  * Plugin Name: All in One Invite Codes
  * Plugin URI:  https://themekraft.com/all-in-one-invite-codes/
  * Description: Create Invite only Registration Funnels and Products. Boost your site launch and get the attention you desire by creating an intelligent invite only Platform.
- * Version: 1.3.3
+ * Version: 1.3.4
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: ThemeKraft
@@ -48,6 +48,30 @@ if ( function_exists( 'all_in_one_invite_codes_core_fs' ) ) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+if ( ! function_exists( 'all_in_one_invite_codes_plugin_dependencies_slug' ) ) {
+	/**
+	 * Let the running copy of All in One Invite Codes satisfy "Requires Plugins: all-in-one-invite-codes".
+	 *
+	 * WordPress (6.5+) matches plugin dependencies by folder name, and the premium
+	 * build lives in `all-in-one-invite-codes-premium`. Without this, add-ons that
+	 * declare All in One Invite Codes as a dependency could not be activated next
+	 * to the premium build.
+	 *
+	 * @param string $slug Dependency slug from a plugin's "Requires Plugins" header.
+	 *
+	 * @return string
+	 */
+	function all_in_one_invite_codes_plugin_dependencies_slug( $slug ) {
+		if ( 'all-in-one-invite-codes' === $slug ) {
+			return basename( __DIR__ );
+		}
+
+		return $slug;
+	}
+
+	add_filter( 'wp_plugin_dependencies_slug', 'all_in_one_invite_codes_plugin_dependencies_slug' );
+}
+
 if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 	/**
 	 * Class AllinOneInviteCodes
@@ -57,7 +81,7 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		/**
 		 * @var string
 		 */
-		public static $version = '1.3.3';
+		public static $version = '1.3.4';
 
 		/**
 		 * Instance of this class

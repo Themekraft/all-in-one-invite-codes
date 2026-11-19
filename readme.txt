@@ -4,7 +4,7 @@ Tags: registration, invite only, invite codes
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,13 +35,6 @@ Use Invite Codes in any BuddyForms form and limit Contact, Registration and Post
 
 * BuddyPress
 Let your users manage there Invite Codes and invite others from there profile.
-
-### Add-ons coming soon
-* MyCred Integration
-Give your users credit for there used coupon codes or if they invite their friends. We build some nice roles so you can increase the engagement of your users to invite others by giving them points
-
-* Invite Tree Stats
-See the flow of invites in a tree and manage your userbase in a way it would not be possible without an invite system. If you have a closed community, you can see in the tree where the people come from, and if you have some unwanted people coming into your community, you can see from which user the people got invited and delete the complete tree or make this user as spam, unwanted or fake.
 
 ### How it works.
 You create the first bunch of invite codes and define how many new Invite Codes get created for a new user. Also, no new invite codes are possible if you want to only invite people without letting them invite their friends. In case you allow your users to invite their friends. The new user gets a list of invite codes and can buy himself invite others. If the friend registers with the invite code, he will again get new invite codes generated and so on. With this technique, you can quickly build a user base of one particular user type.
@@ -82,6 +75,11 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.4 - 18 Nov 2026 =
+* The premium version now satisfies add-ons that list All in One Invite Codes as a required plugin (WordPress 6.5+ plugin dependencies).
+* Updated the Go Pro links to the current themekraft.com product pages.
+* The Go Pro page now lists only what the Invite Codes Bundle includes, and the readme no longer announces add-ons that are not planned.
+
 = 1.3.3 - 07 Oct 2026 =
 * Fixed a fatal error when activating the premium version while the free version is active. Activating one version now deactivates the other one.
 * Invite Codes Bundle licenses can now be activated in All in One Invite Codes, so the Go Pro menu is hidden for bundle owners.
