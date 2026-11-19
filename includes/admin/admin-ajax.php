@@ -114,8 +114,8 @@ function all_in_one_invite_codes_send_invite_mail() {
 
 add_action( 'wp_ajax_all_in_one_invite_codes_send_invite_mail', 'all_in_one_invite_codes_send_invite_mail' );
 
-add_action( 'wp_ajax_aioic_generate_multiple_invites', 'aioic_generate_multiple_invites' );
-function aioic_generate_multiple_invites() {
+add_action( 'wp_ajax_aioic_generate_multiple_invites', 'all_in_one_invite_codes_generate_multiple_invites' );
+function all_in_one_invite_codes_generate_multiple_invites() {
 
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_send_json( array( 'errors' => esc_html__( 'You do not have permission to generate invite codes.', 'all-in-one-invite-codes' ) ) );
