@@ -34,6 +34,7 @@ function all_in_one_invite_codes_register_post_type() {
 		'show_in_nav_menus'     => false,
 		'exclude_from_search'   => true,
 		'capability_type'       => 'post',
+		'capabilities'          => all_in_one_invite_codes_post_type_capabilities(),
 		'map_meta_cap'          => true,
 		'hierarchical'          => true,
 		'rewrite'               => array(
@@ -48,6 +49,29 @@ function all_in_one_invite_codes_register_post_type() {
 }
 
 add_action( 'init', 'all_in_one_invite_codes_register_post_type' );
+
+/**
+ * Capabilities of the invite code screens. Invite codes are managed by the same
+ * users as the settings (administrators by default), not by everyone who can
+ * write posts.
+ *
+ * @return array<string,string>
+ */
+function all_in_one_invite_codes_post_type_capabilities() {
+	/**
+	 * Capability needed to create and edit invite codes in wp-admin.
+	 *
+	 * @param string $capability Default 'manage_options'.
+	 */
+	$capability = apply_filters( 'all_in_one_invite_codes_manage_codes_capability', 'manage_options' );
+
+	$capabilities = array();
+	foreach ( array( 'edit_posts', 'edit_others_posts', 'edit_private_posts', 'edit_published_posts', 'publish_posts', 'read_private_posts', 'delete_posts', 'delete_private_posts', 'delete_published_posts', 'delete_others_posts', 'create_posts' ) as $primitive ) {
+		$capabilities[ $primitive ] = $capability;
+	}
+
+	return $capabilities;
+}
 
 
 /**
