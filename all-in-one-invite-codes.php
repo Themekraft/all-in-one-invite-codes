@@ -9,8 +9,8 @@
  * Requires PHP: 7.4
  * Author: ThemeKraft
  * Author URI: https://themekraft.com/
- * License: GPLv3
- * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: all-in-one-invite-codes
  * Domain Path: /languages
  * Svn: all-in-one-invite-codes

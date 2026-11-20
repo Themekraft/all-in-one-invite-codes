@@ -5,8 +5,8 @@ Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.3.5
-License: GPL 3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Intelligent automatic invite codes system. Create Invite only Registration Funnels, Products and more.
 
