@@ -21,8 +21,8 @@ if ( ! function_exists( 'all_in_one_invite_codes_pricing_page_config' ) ) {
 			return $config;
 		}
 
-		$config['heading']    = __( 'Get the Invite Codes Bundle', 'all-in-one-invite-codes' );
-		$config['subheading'] = __( 'Unlock the full Invite Codes family — BuddyPress, BuddyForms and WooCommerce extensions, with a year of updates and support.', 'all-in-one-invite-codes' );
+		$config['heading']    = __( 'Bring invite codes to your members, forms and shop', 'all-in-one-invite-codes' );
+		$config['subheading'] = __( 'The core plugin is free. Three add-ons, sold together in the Invite Codes Bundle, bring invite codes to BuddyPress, BuddyForms and WooCommerce.', 'all-in-one-invite-codes' );
 
 		$config['bundle'] = array(
 			'product_id' => '8013',
@@ -37,15 +37,15 @@ if ( ! function_exists( 'all_in_one_invite_codes_pricing_page_config' ) ) {
 				'highlight' => true,
 			),
 			array(
-				'label' => __( 'All in One Invite Codes BuddyPress', 'all-in-one-invite-codes' ),
+				'label' => __( 'BuddyPress add-on: invite-only signup, an "Invite Friends" profile tab, and automatic friend request and follow', 'all-in-one-invite-codes' ),
 				'url'   => 'https://themekraft.com/add-on/invite-codes-buddypress/',
 			),
 			array(
-				'label' => __( 'All in One Invite Codes BuddyForms', 'all-in-one-invite-codes' ),
+				'label' => __( 'BuddyForms add-on: an invite code field for any BuddyForms form, filled in from the invite link', 'all-in-one-invite-codes' ),
 				'url'   => 'https://themekraft.com/add-on/restrict-forms-invite-codes/',
 			),
 			array(
-				'label' => __( 'All in One Invite Codes WooCommerce Checkout', 'all-in-one-invite-codes' ),
+				'label' => __( 'WooCommerce add-on: invite-only products, selling invite codes, and a purchase email template', 'all-in-one-invite-codes' ),
 				'url'   => 'https://themekraft.com/add-on/invite-codes-woocommerce/',
 			),
 			__( 'One year of support', 'all-in-one-invite-codes' ),
