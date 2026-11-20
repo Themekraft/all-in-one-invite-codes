@@ -40,6 +40,13 @@ function all_in_one_invite_codes_validate_code( $code, $user_email = '', $type =
 			$is_multiple_use                 = isset( $all_in_one_invite_codes_options['multiple_use'] ) ? true : false;
 
 			if ( $is_multiple_use ) {
+				// A disabled multiple use code stops working, like a single use one.
+				if ( ! all_in_one_invite_codes_is_valide( get_the_ID() ) ) {
+					$result['error'] = __( 'This invite code has already been used or has been deactivated.', 'all-in-one-invite-codes' );
+
+					return $result;
+				}
+
 				$code_amount = isset( $all_in_one_invite_codes_options['generate_codes'] ) ? intval( $all_in_one_invite_codes_options['generate_codes'] ) : 0;
 				if ( $code_amount <= 0 ) {
 

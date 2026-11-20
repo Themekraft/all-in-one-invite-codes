@@ -4,7 +4,7 @@ Tags: registration, invite only, invite codes
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,12 @@ Have fun!
 6. eMail Form
 
 == Changelog ==
+= 1.3.6 - 20 Nov 2026 =
+* Security: only administrators can create and edit invite codes in wp-admin. To allow other roles, use the `all_in_one_invite_codes_manage_codes_capability` filter.
+* Security: disabled multiple use invite codes now stop working.
+* Security: creating invite codes from the front end now checks who is creating them, and an existing invite code can no longer be created again.
+* Security: member names are now escaped in the Tree View.
+
 = 1.3.5 - 19 Nov 2026 =
 * Fixed saving the General settings turning off the invite code requirement on the WordPress registration form. If you saved the General settings since version 1.3.0, check that "Default Registration" is still set the way you want after updating.
 * Fixed the WooCommerce registration setting of the WooCommerce add-on not being saved.
