@@ -205,7 +205,8 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 			 * @filter: all_in_one_invite_codes_set_globals
 			 *
 			 */
-			$all_in_one_invite_codes = apply_filters( 'tk_all_in_one_invite_codes_set_globals', get_option( 'tk_all_in_one_invite_codes_options' ) );
+			$all_in_one_invite_codes = apply_filters_deprecated( 'tk_all_in_one_invite_codes_set_globals', array( get_option( 'tk_all_in_one_invite_codes_options' ) ), '1.3.6', 'all_in_one_invite_codes_set_globals' );
+			$all_in_one_invite_codes = apply_filters( 'all_in_one_invite_codes_set_globals', $all_in_one_invite_codes );
 
 			return $all_in_one_invite_codes;
 		}
@@ -437,7 +438,7 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		<?php
 	}
 
-	function activate_all_in_one_invite_codes_at_plugin_loader() {
+	function all_in_one_invite_codes_activate_at_plugin_loader() {
 		// AllinOneInviteCodes requires php version 5.3 or higher.
 		if ( PHP_VERSION < 5.3 ) {
 			add_action( 'admin_notices', 'all_in_one_invite_codes_php_version_admin_notice' );
@@ -451,5 +452,5 @@ if ( ! class_exists( 'AllinOneInviteCodes' ) ) {
 		}
 	}
 
-	activate_all_in_one_invite_codes_at_plugin_loader();
+	all_in_one_invite_codes_activate_at_plugin_loader();
 }
