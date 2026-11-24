@@ -110,7 +110,7 @@ add_filter( 'page_row_actions', 'all_in_one_invite_codes_add_action_buttons', 10
  *
  * @return array
  */
-function tk_invite_codes_columns( $columns, $post_id = false ) {
+function all_in_one_invite_codes_posts_columns( $columns, $post_id = false ) {
 	unset( $columns['date'] );
 	unset( $columns['title'] );
 
@@ -123,7 +123,7 @@ function tk_invite_codes_columns( $columns, $post_id = false ) {
 	return $columns;
 }
 
-add_action( 'manage_tk_invite_codes_posts_columns', 'tk_invite_codes_columns', 102, 2 );
+add_action( 'manage_tk_invite_codes_posts_columns', 'all_in_one_invite_codes_posts_columns', 102, 2 );
 
 /**
  *
@@ -134,7 +134,7 @@ add_action( 'manage_tk_invite_codes_posts_columns', 'tk_invite_codes_columns', 1
  *
  * @return array
  */
-function custom_tk_invite_codes_columns( $columns, $post_id = false ) {
+function all_in_one_invite_codes_posts_custom_column( $columns, $post_id = false ) {
 
 	$all_in_one_invite_codes_options = get_post_meta( $post_id, 'all_in_one_invite_codes_options', true );
 
@@ -195,7 +195,7 @@ function all_in_one_invite_codes_get_multiple_use( $invite_code_id ) {
 
 }
 
-add_action( 'manage_tk_invite_codes_posts_custom_column', 'custom_tk_invite_codes_columns', 10, 2 );
+add_action( 'manage_tk_invite_codes_posts_custom_column', 'all_in_one_invite_codes_posts_custom_column', 10, 2 );
 
 /**
  *
