@@ -8,7 +8,7 @@ Stable tag: 1.3.6
 License: GPL 3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Intelligent automatic invite codes system. Create Invite only Registration Funnels, Products and more.
+Invite-only registration: create invite codes, assign them to emails and let members invite friends. Add-ons for BuddyPress, BuddyForms, WooCommerce.
 
 == Description ==
 
@@ -16,39 +16,39 @@ Get full control over the registration process by enabling invitation based Regi
 
 [youtube https://www.youtube.com/watch?v=GQ9f_YpyReQ]
 
-### Why is this a great Idea?
-* Use it for Marketing
-Perfect for any launch of a community site. Get a great benefit from the snowball effect.
+= What you get for free =
 
-* You will now know more about your user
-Get a clear picture of the members of your site by knowing who invite them to your website.
+* Invite codes with a status and a disable action
+* Per code: assign it to an email address, make it multi-use with a number of uses, set how many new codes the new member receives, and add a purpose
+* Invite email sent automatically when a code is assigned to an email address, with editable templates
+* Members can edit the subject and message of each invite before they send it
+* Invite code field on the WordPress registration form
+* Create many codes at once
+* Tree view: invite tree, user tree, user tracker and basic statistics
+* Shortcodes so members can see their codes and invite friends from any page
 
-* Truly secure and transparent
-Block unwanted registrations and spam once and for all with an invite-only form element.
+= How it works =
 
-###Use our Pro Add-ons
-* WooComemrce
-Sell Products to invitation only. Ideal for a product release if you want to limit the user access in the beginning or get a social snowball effect by limiting the access to invite only.
+You create the first batch of invite codes and decide how many new codes each new member receives. Members can then invite their friends, and every friend who registers with a code receives new codes too, so your user base grows by invitation. You can also run the plugin invite-only without letting members invite others.
 
-* BuddyForms
-Use Invite Codes in any BuddyForms form and limit Contact, Registration and Post Forms for users with an Invite Code. A perfect tool to allow "User Generated Content" on your site for people with an Invite Code only.
+= Want more? Paid add-ons =
 
-* BuddyPress
-Let your users manage there Invite Codes and invite others from there profile.
+The core plugin is free. Three paid add-ons bring invite codes to BuddyPress, BuddyForms and WooCommerce. They are sold together in the Invite Codes Bundle.
 
-### How it works.
-You create the first bunch of invite codes and define how many new Invite Codes get created for a new user. Also, no new invite codes are possible if you want to only invite people without letting them invite their friends. In case you allow your users to invite their friends. The new user gets a list of invite codes and can buy himself invite others. If the friend registers with the invite code, he will again get new invite codes generated and so on. With this technique, you can quickly build a user base of one particular user type.
+* BuddyPress: invite-only BuddyPress or BuddyBoss signup, an "Invite Friends" profile tab where members create codes, send one or many invitations and track sent invites, an automatic friend request and follow from the new member to the inviter, and a widget with the member's codes
+* BuddyForms: an invite code field for any BuddyForms form, filled in automatically from the invite link
+* WooCommerce: invite-only products that ask for a valid code at checkout, selling invite codes as a product, and a WooCommerce purchase email template
 
-* Display the  invite codes to invite others in any Page or BuddyPress Profile
+[Get the Invite Codes Bundle on themekraft.com](https://themekraft.com/plugins/all-in-one-invite-codes/?utm_source=wordpress.org&utm_medium=referral&utm_campaign=free-vs-pro&utm_content=all-in-one-invite-codes)
 
-* Let your users write a custom invite message or use a predefined message
+= Use cases =
 
-### Use Cases
 * Make your site launch more attractive
 * Keep your member flow transparent
 * Create a homogeneous user base
-* Use for Marketing to generate a Snowball effect.
+* Use it for marketing to generate a snowball effect
 * Invite people to write on your site
+* Find out who invited each member with the invite tree
 
 == Installation ==
 Install like any other WordPress plugin.
@@ -57,14 +57,42 @@ Activate the plugin through the 'Plugins' menu in WordPress.
 Have fun!
 
 == Frequently Asked Questions ==
-#Can I create invite codes for one specific eMail Address?
-* YES
 
-#Can I define how many new Codes get created for each new user?
-* Yes
+= Is the plugin free? =
 
-#Can I use this out of the box with the WordPress Registration
-* Yes
+Yes. The core plugin is free, including invite codes, invite emails, the registration form field and the invite tree. You do not need a license to use it. Paid add-ons connect it to BuddyPress, BuddyForms and WooCommerce.
+
+= Can I create invite codes for one specific email address? =
+
+Yes. Assign a code to an email address and the invite email is sent automatically.
+
+= Can I define how many new codes get created for each new user? =
+
+Yes. Set it per code.
+
+= Can I use this out of the box with the WordPress registration? =
+
+Yes. The invite code field is added to the default WordPress registration form.
+
+= Can a code be used more than once? =
+
+Yes. Make a code multi-use and set the number of uses.
+
+= Can members write their own invite message? =
+
+Yes. When a member sends an invite, the Subject and Message fields can be edited. They are pre-filled from the email templates you set.
+
+= Can members manage their invite codes from their BuddyPress profile? =
+
+That needs the paid BuddyPress add-on, which adds an "Invite Friends" tab to the profile. Without it, members can see their codes and invite friends from any page with the included shortcodes.
+
+= Can I limit products to invited customers, or sell invite codes? =
+
+Yes, with the paid WooCommerce add-on.
+
+= Does it work with BuddyBoss? =
+
+Yes. The paid BuddyPress add-on works with BuddyPress and BuddyBoss.
 
 == Screenshots ==
 1. Manage Invite Codes
